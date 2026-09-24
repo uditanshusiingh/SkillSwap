@@ -48,6 +48,14 @@ The backend exposes a REST API for the marketplace workflow.
 | POST | `/api/bookings` | Create a booking |
 | PATCH | `/api/bookings/:id/status` | Update a booking's status |
 
+## Admin Panel (optional)
+
+An optional admin page lives at `/admin` (not linked in the navbar). It is **not** one of the five required features and graders do not need it. It is not a login system: it is unlocked by a single secret key.
+
+- Set `ADMIN_KEY` in the server environment (e.g. on Render). If `ADMIN_KEY` is not set, the admin API is disabled.
+- Open `/admin`, enter the key, and you can: see stats, add the sample gigs, delete gigs (and their bookings), change or delete bookings, and reset all data.
+- The key is checked by the server on every admin request (`/api/admin/*`, header `x-admin-key`); repeated wrong keys are rate limited.
+
 ## Run Locally
 
 Clone the repository first:
@@ -83,6 +91,7 @@ MONGO_URI=mongodb://127.0.0.1:27017/skillswap
 PORT=5000
 CLIENT_URL=http://localhost:5173
 SEED_ON_START=false
+ADMIN_KEY=
 ```
 
 Set `SEED_ON_START=true` to add a few sample gigs on startup when the database has none. You can also run `npm run seed` in `server/` (add `-- --force` to insert them even if gigs already exist).
