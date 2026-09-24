@@ -104,3 +104,89 @@ html[data-theme="dark"] .text-bg-light{background-color:var(--surface-soft)!impo
 html[data-theme="dark"] .btn-light{background:var(--surface-soft);border-color:var(--border-strong);color:var(--ink)}
 html[data-theme="dark"] .btn-close{filter:invert(1) grayscale(1)}
 @media(max-width:991.98px){.navbar-nav .nav-link{border-top-color:var(--border)}}
+
+
+/* ===== Theme contrast fixes: Bootstrap utilities and components ===== */
+html[data-theme="dark"]{
+  --bs-body-bg:var(--page);
+  --bs-body-color:var(--ink);
+  --bs-secondary-color:var(--muted);
+  --bs-tertiary-bg:var(--surface-soft);
+  --bs-border-color:var(--border);
+}
+html[data-theme="dark"] .navbar-brand,
+html[data-theme="dark"] .navbar-brand:hover,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .card-body,
+html[data-theme="dark"] .page-head,
+html[data-theme="dark"] .form-card,
+html[data-theme="dark"] .feature,
+html[data-theme="dark"] .booking-card,
+html[data-theme="dark"] .success-card,
+html[data-theme="dark"] .stat,
+html[data-theme="dark"] .modal-content{
+  color:var(--ink);
+}
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .modal-content,
+html[data-theme="dark"] .list-group-item{
+  --bs-card-bg:var(--surface);
+  --bs-card-color:var(--ink);
+  background-color:var(--surface);
+  color:var(--ink);
+  border-color:var(--border);
+}
+html[data-theme="dark"] .text-secondary,
+html[data-theme="dark"] .text-body-secondary,
+html[data-theme="dark"] .lead.text-secondary{
+  color:var(--muted)!important;
+}
+html[data-theme="dark"] .btn-dark,
+html[data-theme="dark"] .btn-dark:hover,
+html[data-theme="dark"] .btn-dark:focus{
+  --bs-btn-color:#fff;
+  --bs-btn-bg:#5144d5;
+  --bs-btn-border-color:#5144d5;
+  --bs-btn-hover-color:#fff;
+  --bs-btn-hover-bg:#6558eb;
+  --bs-btn-hover-border-color:#6558eb;
+  --bs-btn-active-color:#fff;
+  --bs-btn-active-bg:#5144d5;
+  --bs-btn-active-border-color:#5144d5;
+}
+html[data-theme="dark"] .btn-outline-dark{
+  --bs-btn-color:var(--ink);
+  --bs-btn-border-color:#727987;
+  --bs-btn-hover-color:#111318;
+  --bs-btn-hover-bg:#f3f4f6;
+  --bs-btn-hover-border-color:#f3f4f6;
+}
+html[data-theme="dark"] .nav-pills .nav-link.active{
+  color:#fff!important;
+  background-color:#5144d5!important;
+}
+html[data-theme="dark"] .hero-card{
+  color:#fff;
+}
+html[data-theme="dark"] .hero-card strong{
+  color:#fff;
+}
+html[data-theme="dark"] .hero-card small,
+html[data-theme="dark"] .mini-label{
+  color:#bfc2cd;
+}
+html[data-theme="dark"] .form-control:disabled,
+html[data-theme="dark"] .form-select:disabled{
+  background:var(--surface-soft);
+  color:var(--muted);
+}
+html[data-theme="dark"] .table-responsive.card{
+  background:var(--surface);
+}
+html[data-theme="dark"] .navbar-toggler-icon{
+  filter:invert(1);
+}
+html[data-theme="light"] .navbar-brand,
+html:not([data-theme]) .navbar-brand{
+  color:#171717;
+}
