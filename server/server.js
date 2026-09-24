@@ -7,7 +7,21 @@ const bookingRoutes = require('./routes/bookingRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-app.use(cors({ origin: true }));
+
+// CORS: CLIENT_URL can hold one or more comma-separated origins.
+// If it is unset, all origins are allowed (handy for local dev).
+const allowedOrigins = (process.env.CLIENT_URL || '')
+  .split(',')
+  .map((o) => o.trim().replace(/\/+$/, ''))
+  .filter(Boolean);
+if (!allowedOrigins.length) console.warn('CLIENT_URL is not set - CORS allows all origins');
+app.use(cors({
+  origin: (origin, cb) => {
+    // no Origin header = curl / health checks / server-to-server
+    if (!origin || !allowedOrigins.length || allowedOrigins.includes(origin)) return cb(null, true);
+    return cb(null, false);
+  }
+}));
 app.use(express.json());
 app.get('/api/health', (_req, res) => res.json({ ok: true, service: 'SkillSwap API' }));
 app.use('/api/gigs', gigRoutes);
