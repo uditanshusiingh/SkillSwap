@@ -82,7 +82,10 @@ Server `.env`:
 MONGO_URI=mongodb://127.0.0.1:27017/skillswap
 PORT=5000
 CLIENT_URL=http://localhost:5173
+SEED_ON_START=false
 ```
+
+Set `SEED_ON_START=true` to add a few sample gigs on startup when the database has none. You can also run `npm run seed` in `server/` (add `-- --force` to insert them even if gigs already exist).
 
 Client `.env`:
 
@@ -93,11 +96,13 @@ VITE_API_URL=http://localhost:5000/api
 ## Deployment
 
 - **Frontend (Vercel):** set `VITE_API_URL` to the deployed API base URL, e.g. `https://skillswap-api-3k6e.onrender.com/api`.
-- **Backend (Render):** set `MONGO_URI` and `PORT`, and set `CLIENT_URL` to the deployed frontend URL (`https://skillswap-team24.vercel.app`, no trailing slash needed). CORS only allows requests from the origin(s) listed there; use a comma-separated list for more than one. If `CLIENT_URL` is not set, all origins are allowed (local development only).
+- **Backend (Render):** set `MONGO_URI` and `PORT`, and set `CLIENT_URL` to the deployed frontend URL (`https://skillswap-team24.vercel.app`, no trailing slash needed). CORS only allows requests from the origin(s) listed there; use a comma-separated list for more than one. If `CLIENT_URL` is not set, all origins are allowed (local development only). Set `SEED_ON_START=true` once so the marketplace is not empty for first-time visitors (sample gigs are only added while the database has no gigs).
 
 ## Demo Access
 
 No credentials are required. Use the navigation to test all five required features.
+
+The Creator Dashboard shows every booking request by default. Because there is no login, creators can type their name in the optional "Filter by creator name" box to see only the bookings for their own gigs.
 
 ## Submission Checklist
 
