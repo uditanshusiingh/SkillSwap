@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { createBooking, createPaymentOrder, getGig, verifyPayment } from '../api';
+import { createPaymentOrder, getGig, verifyPayment } from '../api';
 import Loader from '../components/Loader';
 
 const loadRazorpay = () => new Promise((resolve) => {
