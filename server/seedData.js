@@ -23,4 +23,13 @@ async function seedIfEmpty({ force = false } = {}) {
   return created.length;
 }
 
-module.exports = { sampleGigs, seedIfEmpty };
+// Adds only the sample gigs that are missing (matched by creator + title). Returns how many were added.
+async function seedMissing() {
+  const existing = await Gig.find({}, 'creatorName title').lean();
+  const have = new Set(existing.map((g) => `${g.creatorName}|${g.title}`));
+  const toAdd = sampleGigs.filter((g) => !have.has(`${g.creatorName}|${g.title}`));
+  if (toAdd.length) await Gig.insertMany(toAdd);
+  return toAdd.length;
+}
+
+module.exports = { sampleGigs, seedIfEmpty, seedMissing };

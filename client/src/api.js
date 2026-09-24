@@ -6,3 +6,6 @@ export const createGig = (data) => api.post('/gigs', data);
 export const getBookings = (email='') => api.get('/bookings', { params: email ? { email } : {} });
 export const createBooking = (data) => api.post('/bookings', data);
 export const updateBookingStatus = (id, status) => api.patch(`/bookings/${id}/status`, { status });
+
+// Admin API: the secret key is sent on every request (see server/middleware/adminAuth.js)
+export const adminClient = (key) => axios.create({ baseURL: api.defaults.baseURL, timeout: 90000, headers: { 'x-admin-key': key } });

@@ -4,10 +4,12 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const gigRoutes = require('./routes/gigRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 const { seedIfEmpty } = require('./seedData');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+app.set('trust proxy', 1); // Render sits behind a proxy; needed for the admin rate limit to see real IPs
 
 // CORS: CLIENT_URL can hold one or more comma-separated origins.
 // If it is unset, all origins are allowed (handy for local dev).
@@ -27,6 +29,7 @@ app.use(express.json());
 app.get('/api/health', (_req, res) => res.json({ ok: true, service: 'SkillSwap API' }));
 app.use('/api/gigs', gigRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/admin', adminRoutes);
 
 async function start() {
   try {
