@@ -41,7 +41,7 @@ export default function GigDetails() {
 
   return (
     <main className="container py-5">
-      <div className="row g-5">
+      <div className="row g-4 g-lg-5">
         <div className="col-lg-7">
           <span className="badge category">{gig.category}</span>
           <h1 className="display-5 fw-bold mt-3">{gig.title}</h1>

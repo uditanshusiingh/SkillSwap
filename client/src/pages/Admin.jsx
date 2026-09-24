@@ -142,7 +142,7 @@ function AdminPanel({ client, onLogout }) {
         <button className="btn btn-outline-dark" onClick={() => onLogout('')}>Log out</button>
       </div>
 
-      <ul className="nav nav-pills my-4 gap-1">
+      <ul className="nav nav-pills tabs-scroll my-4 gap-1">
         {[['overview', 'Overview'], ['gigs', `Gigs${stats ? ` (${stats.gigs})` : ''}`], ['bookings', `Bookings${stats ? ` (${stats.bookings})` : ''}`]].map(([id, label]) => (
           <li className="nav-item" key={id}>
             <button className={`nav-link ${tab === id ? 'active bg-dark' : 'text-dark'}`} onClick={() => setTab(id)}>{label}</button>
@@ -158,8 +158,8 @@ function AdminPanel({ client, onLogout }) {
           {tab === 'overview' && stats && (
             <>
               <div className="stats row g-3">
-                {[['Gigs', stats.gigs], ['Bookings', stats.bookings], ['Pending', stats.status.Pending], ['Accepted', stats.status.Accepted], ['Declined', stats.status.Declined]].map(([label, n]) => (
-                  <div className="col-6 col-md" key={label}><div className="stat"><small>{label}</small><strong>{n}</strong></div></div>
+                {[['Gigs', stats.gigs, 'col-6'], ['Bookings', stats.bookings, 'col-6'], ['Pending', stats.status.Pending, 'col-4'], ['Accepted', stats.status.Accepted, 'col-4'], ['Declined', stats.status.Declined, 'col-4']].map(([label, n, cols]) => (
+                  <div className={`${cols} col-md`} key={label}><div className="stat"><small>{label}</small><strong>{n}</strong></div></div>
                 ))}
               </div>
 
@@ -192,18 +192,18 @@ function AdminPanel({ client, onLogout }) {
           {tab === 'gigs' && (
             gigs.length ? (
               <div className="table-responsive card border-0 shadow-sm">
-                <table className="table align-middle mb-0">
+                <table className="table table-stack align-middle mb-0">
                   <thead><tr><th>Title</th><th>Creator</th><th>Category</th><th>Rate</th><th>Bookings</th><th>Created</th><th /></tr></thead>
                   <tbody>
                     {gigs.map((g) => (
                       <tr key={g._id}>
-                        <td><strong>{g.title}</strong></td>
-                        <td>{g.creatorName}</td>
-                        <td>{g.category}</td>
-                        <td>₹{g.rate}</td>
-                        <td>{g.bookingCount}</td>
-                        <td>{g.createdAt ? new Date(g.createdAt).toLocaleDateString() : '—'}</td>
-                        <td><button className="btn btn-sm btn-outline-danger" disabled={busy} onClick={() => deleteGig(g)}>Delete</button></td>
+                        <td data-label="Title"><strong>{g.title}</strong></td>
+                        <td data-label="Creator">{g.creatorName}</td>
+                        <td data-label="Category">{g.category}</td>
+                        <td data-label="Rate">₹{g.rate}</td>
+                        <td data-label="Bookings">{g.bookingCount}</td>
+                        <td data-label="Created">{g.createdAt ? new Date(g.createdAt).toLocaleDateString() : '—'}</td>
+                        <td data-label="" className="row-actions"><button className="btn btn-sm btn-outline-danger" disabled={busy} onClick={() => deleteGig(g)}>Delete</button></td>
                       </tr>
                     ))}
                   </tbody>
@@ -215,21 +215,21 @@ function AdminPanel({ client, onLogout }) {
           {tab === 'bookings' && (
             bookings.length ? (
               <div className="table-responsive card border-0 shadow-sm">
-                <table className="table align-middle mb-0">
+                <table className="table table-stack align-middle mb-0">
                   <thead><tr><th>Client</th><th>Gig</th><th>Date</th><th>Status</th><th>Change status</th><th /></tr></thead>
                   <tbody>
                     {bookings.map((b) => (
                       <tr key={b._id}>
-                        <td><strong>{b.clientName}</strong><br /><small>{b.clientEmail}</small></td>
-                        <td>{b.gigId?.title || '—'}</td>
-                        <td>{b.preferredDate}</td>
-                        <td><StatusBadge status={b.status} /></td>
-                        <td>
+                        <td data-label="Client"><div><strong>{b.clientName}</strong><br /><small>{b.clientEmail}</small></div></td>
+                        <td data-label="Gig">{b.gigId?.title || '—'}</td>
+                        <td data-label="Date">{b.preferredDate}</td>
+                        <td data-label="Status"><StatusBadge status={b.status} /></td>
+                        <td data-label="Change status">
                           <select className="form-select form-select-sm" value={b.status} disabled={busy} onChange={(e) => setStatus(b, e.target.value)} aria-label={`Status for ${b.clientName}`}>
                             {STATUSES.map((s) => <option key={s}>{s}</option>)}
                           </select>
                         </td>
-                        <td><button className="btn btn-sm btn-outline-danger" disabled={busy} onClick={() => deleteBooking(b)}>Delete</button></td>
+                        <td data-label="" className="row-actions"><button className="btn btn-sm btn-outline-danger" disabled={busy} onClick={() => deleteBooking(b)}>Delete</button></td>
                       </tr>
                     ))}
                   </tbody>
