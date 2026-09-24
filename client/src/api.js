@@ -9,3 +9,6 @@ export const updateBookingStatus = (id, status) => api.patch(`/bookings/${id}/st
 
 // Admin API: the secret key is sent on every request (see server/middleware/adminAuth.js)
 export const adminClient = (key) => axios.create({ baseURL: api.defaults.baseURL, timeout: 90000, headers: { 'x-admin-key': key } });
+
+export const createPaymentOrder = (data) => api.post('/payments/order', data);
+export const verifyPayment = (data) => api.post('/payments/verify', data);
