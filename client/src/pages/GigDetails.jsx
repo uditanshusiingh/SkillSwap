@@ -61,6 +61,12 @@ export default function GigDetails() {
           gig: gig.title,
           creator: gig.creatorName
         },
+        method: {
+          upi: true,
+          card: true,
+          netbanking: true,
+          wallet: true
+        },
         theme: {
           color: '#6d5dfc'
         },
