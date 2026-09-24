@@ -7,6 +7,8 @@ A creator gig marketplace for the **Creator Economy** track.
 - Frontend: https://skillswap-team24.vercel.app/
 - API: https://skillswap-api-3k6e.onrender.com/ (health check: `/api/health`)
 
+> The API runs on Render's free tier, so the first request after a period of inactivity can take up to ~60 seconds while the server wakes up. The app shows a "server is waking up" message during this time.
+
 **Hackathon ID:** `AZIS-NEA3TC`
 
 ## Required Features
@@ -31,11 +33,9 @@ No authentication (login/signup) is implemented. Graders can access every featur
 | Database | MongoDB / Mongoose |
 | HTTP client | Axios |
 
-## Standard API
+## API Endpoints
 
-This project exposes a REST API for the marketplace workflow. The final Standard API declaration should be set according to the exact hackathon track specification if the track provides a separate required API contract.
-
-### API Endpoints
+The backend exposes a REST API for the marketplace workflow.
 
 | Method | Endpoint | Description |
 | --- | --- | --- |
@@ -93,7 +93,7 @@ VITE_API_URL=http://localhost:5000/api
 ## Deployment
 
 - **Frontend (Vercel):** set `VITE_API_URL` to the deployed API base URL, e.g. `https://skillswap-api-3k6e.onrender.com/api`.
-- **Backend (Render):** set `MONGO_URI` and `PORT`, and set `CLIENT_URL` to the deployed frontend URL (`https://skillswap-team24.vercel.app`) so CORS allows requests from it.
+- **Backend (Render):** set `MONGO_URI` and `PORT`, and set `CLIENT_URL` to the deployed frontend URL (`https://skillswap-team24.vercel.app`, no trailing slash needed). CORS only allows requests from the origin(s) listed there; use a comma-separated list for more than one. If `CLIENT_URL` is not set, all origins are allowed (local development only).
 
 ## Demo Access
 
@@ -105,4 +105,3 @@ No credentials are required. Use the navigation to test all five required featur
 - Public GitHub repository
 - Hackathon ID in root README
 - No authentication
-- Confirm Standard API status against the track specification

@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api' });
+export const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api', timeout: 90000 });
 export const getGigs = () => api.get('/gigs');
 export const getGig = (id) => api.get(`/gigs/${id}`);
 export const createGig = (data) => api.post('/gigs', data);
