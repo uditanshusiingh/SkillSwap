@@ -40,7 +40,7 @@ export default function CreatorDashboard() {
         <input
           className="form-control form-control-lg"
           list="creator-names"
-          placeholder="Filter by creator name (optional) — leave empty to see all"
+          placeholder="Filter by creator name (optional)" aria-label="Filter by creator name"
           value={creator}
           onChange={(e) => setCreator(e.target.value)}
         />
@@ -61,19 +61,19 @@ export default function CreatorDashboard() {
         <Loader text="Loading booking requests…" />
       ) : visible.length ? (
         <div className="table-responsive card border-0 shadow-sm">
-          <table className="table align-middle mb-0">
+          <table className="table table-stack align-middle mb-0">
             <thead><tr><th>Client</th><th>Gig</th><th>Date</th><th>Requirements</th><th>Status</th><th>Action</th></tr></thead>
             <tbody>
               {visible.map((b) => (
                 <tr key={b._id}>
-                  <td><strong>{b.clientName}</strong><br /><small>{b.clientEmail}</small></td>
-                  <td>{b.gigId?.title || '—'}</td>
-                  <td>{b.preferredDate}</td>
-                  <td className="req">{b.requirements || '—'}</td>
-                  <td><StatusBadge status={b.status} /></td>
-                  <td>
+                  <td data-label="Client"><div><strong>{b.clientName}</strong><br /><small>{b.clientEmail}</small></div></td>
+                  <td data-label="Gig">{b.gigId?.title || '—'}</td>
+                  <td data-label="Date">{b.preferredDate}</td>
+                  <td className="req" data-label="Requirements">{b.requirements || '—'}</td>
+                  <td data-label="Status"><StatusBadge status={b.status} /></td>
+                  <td data-label="">
                     {b.status === 'Pending' && (
-                      <div className="d-flex gap-2">
+                      <div className="d-flex gap-2 row-actions">
                         <button className="btn btn-sm btn-success" onClick={() => change(b._id, 'Accepted')}>Accept</button>
                         <button className="btn btn-sm btn-outline-danger" onClick={() => change(b._id, 'Declined')}>Decline</button>
                       </div>

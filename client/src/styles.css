@@ -1,1 +1,72 @@
 :root{--ink:#171717;--muted:#6b7280;--accent:#6d5dfc;--soft:#f5f5f7}body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#fafafa}.brand{font-size:1.35rem;letter-spacing:-.04em}.brand span,h1 span{color:var(--accent)}.nav-link{font-weight:600}.hero{background:linear-gradient(135deg,#f4f2ff 0%,#fff 55%,#f4f8ff 100%);border-bottom:1px solid #eee}.eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.14em;color:var(--accent)}.hero h1{letter-spacing:-.055em;line-height:1.02}.hero-card{background:#171717;color:#fff;border-radius:24px;padding:28px;box-shadow:0 24px 60px #17171718}.mini-label{font-size:.7rem;letter-spacing:.14em;color:#aaa;margin-bottom:20px}.step{display:flex;gap:16px;padding:18px 0;border-top:1px solid #ffffff1f}.step b{color:#a79dff}.step strong,.step small{display:block}.step small{color:#aaa;margin-top:4px}.feature{background:#fff;border:1px solid #eee;border-radius:18px;padding:25px;height:100%}.feature span{font-weight:800;color:var(--accent)}.feature h4{margin-top:25px}.feature p{color:var(--muted)}.page-head{max-width:760px}.page-head h1{font-size:3rem;font-weight:800;letter-spacing:-.05em;margin-top:8px}.search-panel,.email-bar{background:#fff;border:1px solid #eee;border-radius:18px;padding:18px;margin-top:28px}.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.filter-row .btn{border-radius:999px}.gig-card{border-radius:18px;transition:.2s}.gig-card:hover{transform:translateY(-3px)}.category{background:#eeecff;color:#5648dc}.price{font-weight:800}.narrow{max-width:850px}.form-card{background:#fff;border:1px solid #eee;border-radius:20px;padding:30px}.form-card label{display:block;font-weight:700;margin-bottom:18px}.form-card input,.form-card select,.form-card textarea{margin-top:8px}.price-large{font-size:3rem;font-weight:900}.price-large small{font-size:1rem;font-weight:500;color:var(--muted)}.gig-description{font-size:1.15rem;line-height:1.8;color:#444;white-space:pre-wrap}.success-card{background:#fff;border:1px solid #e7e7e7;border-radius:20px;padding:35px;text-align:center}.check{width:64px;height:64px;border-radius:50%;background:#dcfce7;color:#15803d;font-size:2rem;display:grid;place-items:center;margin:0 auto 20px}.stats .stat{background:#fff;border:1px solid #eee;border-radius:16px;padding:20px}.stat small,.stat strong{display:block}.stat small{color:var(--muted)}.stat strong{font-size:2rem;margin-top:4px}.empty{background:#fff;border:1px dashed #ccc;border-radius:18px;padding:50px;text-align:center;color:var(--muted);margin-top:25px}.table{font-size:.92rem}.table th{white-space:nowrap}.req{max-width:220px}.booking-card{background:#fff;border:1px solid #eee;border-radius:18px;padding:24px}.email-bar{display:flex;gap:10px}.footer{margin-top:80px;border-top:1px solid #eee;background:#fff;padding:24px 0;color:#777;font-size:.85rem}@media(max-width:768px){.hero h1{font-size:2.8rem}.page-head h1{font-size:2.4rem}.email-bar{flex-direction:column}}
+
+/* ===== Responsive ===== */
+main{overflow-wrap:anywhere}
+.table td,.table th{overflow-wrap:anywhere}
+.table td[data-label="Date"],.table td[data-label="Category"],.table td[data-label="Rate"],.table td[data-label="Bookings"],.table td[data-label="Created"]{white-space:nowrap}
+.step b,.badge,.btn,.nav-link,.mini-label{overflow-wrap:normal}
+.step b,.badge{flex:0 0 auto;white-space:nowrap}
+.footer .container{flex-wrap:wrap;gap:6px 16px}
+.tabs-scroll{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs-scroll::-webkit-scrollbar,.filter-row::-webkit-scrollbar{display:none}
+.tabs-scroll .nav-link{white-space:nowrap}
+@media(hover:none){.gig-card:hover{transform:none}}
+
+@media(max-width:991.98px){
+  .navbar-nav .nav-link{padding:.7rem 0;border-top:1px solid #f0f0f0}
+  .navbar-collapse{padding-bottom:.5rem}
+}
+
+@media(max-width:767.98px){
+  /* category chips: one swipeable row instead of a tall block */
+  .filter-row{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:14px -18px 0;padding:0 18px 4px}
+  .filter-row .btn{flex:0 0 auto;white-space:nowrap}
+}
+
+/* tables become stacked cards below the lg breakpoint (each cell shows its column name) */
+@media(max-width:991.98px){
+  .table-stack,.table-stack tbody,.table-stack tr,.table-stack td{display:block;width:100%}
+  .table-stack thead{display:none}
+  .table-stack tr{padding:12px 16px;border-bottom:1px solid #eee}
+  .table-stack tr:last-child{border-bottom:0}
+  .table-stack td{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:6px 0;border:0;background:transparent;box-shadow:none;text-align:right}
+  .table-stack td::before{content:attr(data-label);flex:0 0 34%;font-weight:700;font-size:.8rem;color:var(--muted);text-align:left}
+  .table-stack td[data-label=""]::before{display:none}
+  .table-stack td[data-label=""]{justify-content:flex-end;padding-top:10px}
+  .table-stack td:empty{display:none}
+  .table-stack td,.table-stack td *{overflow-wrap:anywhere}
+  .table-stack td>*{min-width:0}
+  .table-stack .req{max-width:none}
+  .table-stack .row-actions,.table-stack .row-actions .btn{width:100%}
+  .table-stack .row-actions.d-flex .btn{flex:1}
+  .table-stack .btn-sm{padding:.55rem .9rem;font-size:.95rem}
+  .table-stack .form-select{max-width:58%}
+  .table-responsive.card{overflow:visible}
+}
+
+@media(min-width:576px) and (max-width:991.98px){
+  .table-stack .row-actions,.table-stack .row-actions .btn{width:auto}
+  .table-stack .row-actions.d-flex .btn{flex:0 0 auto}
+  .table-stack td[data-label=""]{justify-content:flex-end}
+}
+
+@media(max-width:576px){
+  main.container.py-5{padding-top:2rem!important;padding-bottom:2rem!important}
+  .hero .container{padding-top:2rem!important;padding-bottom:2rem!important}
+  .hero h1{font-size:2.3rem}
+  .hero .btn{flex:1 1 auto}
+  .hero-card{padding:22px}
+  .page-head h1{font-size:2rem}
+  .form-card{padding:20px}
+  .search-panel,.email-bar{padding:14px}
+  .search-panel .form-control-lg,.email-bar .form-control-lg{font-size:1rem}
+  .email-bar .btn-lg{font-size:1rem}
+  .price-large{font-size:2.2rem}
+  .gig-description{font-size:1.05rem}
+  .stats .stat{padding:14px 16px}
+  .stat strong{font-size:1.6rem}
+  .tabs-scroll .nav-link{padding:.5rem .7rem;font-size:.9rem}
+  .success-card{padding:24px}
+  .booking-card{padding:18px}
+  .empty{padding:32px 18px}
+}
