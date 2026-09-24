@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const gigRoutes = require('./routes/gigRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 const { seedMissing } = require('./seedData');
 
 const app = express();
@@ -30,6 +31,7 @@ app.get('/api/health', (_req, res) => res.json({ ok: true, service: 'SkillSwap A
 app.use('/api/gigs', gigRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/payments', paymentRoutes);
 
 async function start() {
   try {
