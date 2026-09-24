@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const gigRoutes = require('./routes/gigRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const adminRoutes = require('./routes/adminRoutes');
-const { seedIfEmpty } = require('./seedData');
+const { seedMissing } = require('./seedData');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -35,10 +35,11 @@ async function start() {
   try {
     if (!process.env.MONGO_URI) throw new Error('MONGO_URI is required');
     await mongoose.connect(process.env.MONGO_URI);
-    if (process.env.SEED_ON_START === 'true') {
-      const n = await seedIfEmpty();
-      if (n) console.log(`Seeded ${n} sample gigs (database was empty)`);
-    }
+    // Keep the marketplace populated with the built-in demo gigs.
+    // seedMissing() is safe to run on every deploy: it preserves real/user-created gigs
+    // and only inserts default gigs that are not already present.
+    const n = await seedMissing();
+    if (n) console.log(`Seeded ${n} missing default gigs`);
     app.listen(PORT, () => console.log(`SkillSwap API running on port ${PORT}`));
   } catch (error) {
     console.error(error.message);
