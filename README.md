@@ -2,6 +2,10 @@
 
 A creator gig marketplace for the Creator Economy track.
 
+## Live Demo
+
+[https://skillswap-team24.vercel.app/](https://skillswap-team24.vercel.app/)
+
 ## Hackathon ID
 
 **AZIS-NEA3TC**
@@ -82,8 +86,8 @@ No credentials are required. Use the navigation to test all five required featur
 
 ## Submission checklist
 
-- [ ] Public deployed URL
-- [ ] Public GitHub repository
+- [x] Public deployed URL: https://skillswap-team24.vercel.app/
+- [x] Public GitHub repository
 - [x] Hackathon ID in root README
 - [x] No authentication
 - [ ] Confirm Standard API status against the track specification
