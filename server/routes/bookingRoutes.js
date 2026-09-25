@@ -38,11 +38,12 @@ router.patch('/:id/cancel', async (req, res) => {
     const { clientEmail } = req.body;
     if (!clientEmail) return res.status(400).json({ message: 'Client email is required.' });
 
-    const booking = await Booking.findById(req.params.id).populate('gigId');
-    if (!booking) return res.status(404).json({ message: 'Booking not found.' });
-    if (booking.clientEmail.toLowerCase() !== clientEmail.toLowerCase()) {
-      return res.status(403).json({ message: 'You can only cancel your own booking.' });
-    }
+    const booking = await Booking.findOne({
+      _id: req.params.id,
+      clientEmail: clientEmail.toLowerCase()
+    }).populate('gigId');
+
+    if (!booking) return res.status(404).json({ message: 'Booking not found for this email.' });
     if (booking.status === 'Cancelled') {
       return res.status(400).json({ message: 'Booking is already cancelled.' });
     }
@@ -50,9 +51,14 @@ router.patch('/:id/cancel', async (req, res) => {
       return res.status(400).json({ message: 'A declined booking cannot be cancelled.' });
     }
 
-    booking.status = 'Cancelled';
-    await booking.save();
-    res.json(booking);
+    // Update directly so cancellation also works safely during schema rollouts.
+    const updated = await Booking.findByIdAndUpdate(
+      req.params.id,
+      { $set: { status: 'Cancelled' } },
+      { new: true, runValidators: false }
+    ).populate('gigId');
+
+    res.json(updated);
   } catch (e) {
     res.status(400).json({ message: 'Could not cancel booking.' });
   }
