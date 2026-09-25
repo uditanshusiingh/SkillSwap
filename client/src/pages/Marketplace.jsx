@@ -23,7 +23,7 @@ export default function Marketplace() {
 
   const visibleGigs = showAll ? filtered : filtered.slice(0, 6);
 
-  return <main className="container py-5">
+  return <main className="container py-5 marketplace-page">
     <div className="page-head">
       <span className="eyebrow">MARKETPLACE</span>
       <h1>Find the right creator.</h1>
