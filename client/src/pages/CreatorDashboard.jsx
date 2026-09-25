@@ -14,6 +14,7 @@ export default function CreatorDashboard() {
   const [statusFilter, setStatusFilter] = useState('All');
   const [search, setSearch] = useState('');
   const [busyId, setBusyId] = useState('');
+  const [showAllGigs, setShowAllGigs] = useState(false);
 
   const load = async () => {
     try {
@@ -109,12 +110,15 @@ export default function CreatorDashboard() {
           <section className="dashboard-section">
             <div className="section-heading">
               <div><span className="eyebrow">YOUR SERVICES</span><h3>My Gigs</h3></div>
-              <span className="section-count">{myGigs.length} {myGigs.length === 1 ? 'gig' : 'gigs'}</span>
+              <div className="d-flex align-items-center gap-3">
+                <span className="section-count">{myGigs.length} {myGigs.length === 1 ? 'gig' : 'gigs'}</span>
+                {myGigs.length > 9 && <button className="btn btn-sm btn-outline-secondary rounded-pill" onClick={() => setShowAllGigs(true)}>View All ({myGigs.length})</button>}
+              </div>
             </div>
 
             {myGigs.length ? (
               <div className="row g-3">
-                {myGigs.map((gig) => {
+                {myGigs.slice(0, 9).map((gig) => {
                   const bookingCount = creatorBookings.filter((b) => b.gigId?._id === gig._id).length;
                   return (
                     <div className="col-md-6 col-xl-4" key={gig._id}>
@@ -133,6 +137,35 @@ export default function CreatorDashboard() {
               </div>
             ) : <div className="empty">No gigs found for this creator.</div>}
           </section>
+
+          {showAllGigs && (
+            <div className="dashboard-modal-backdrop" onClick={(e) => e.target === e.currentTarget && setShowAllGigs(false)}>
+              <div className="dashboard-gigs-modal">
+                <div className="dashboard-modal-head">
+                  <div><span className="eyebrow">YOUR SERVICES</span><h3>All My Gigs</h3></div>
+                  <button className="dashboard-modal-close" aria-label="Close" onClick={() => setShowAllGigs(false)}>×</button>
+                </div>
+                <div className="row g-3">
+                  {myGigs.map((gig) => {
+                    const bookingCount = creatorBookings.filter((b) => b.gigId?._id === gig._id).length;
+                    return (
+                      <div className="col-md-6 col-xl-4" key={gig._id}>
+                        <div className="creator-gig-card">
+                          <div className="d-flex justify-content-between gap-3 align-items-start">
+                            <span className="badge category">{gig.category}</span>
+                            <strong>₹{Number(gig.rate).toLocaleString('en-IN')}</strong>
+                          </div>
+                          <h5>{gig.title}</h5>
+                          <p>{gig.description}</p>
+                          <div className="creator-gig-meta"><span>{bookingCount} {bookingCount === 1 ? 'booking' : 'bookings'}</span><span>Published</span></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
 
           <section className="dashboard-section mt-5">
             <div className="section-heading">
