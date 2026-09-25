@@ -477,3 +477,13 @@ body::-webkit-scrollbar{
     width:min(270px,calc(100vw - 20px));
   }
 }
+
+/* ===== Home feature links + sticky footer layout ===== */
+#root{min-height:100vh}
+.app-shell{min-height:100vh;display:flex;flex-direction:column}
+.app-content{flex:1;display:flex;flex-direction:column}
+.footer{margin-top:auto}
+.feature-link{display:block;color:inherit;text-decoration:none;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.feature-link:hover{color:inherit;text-decoration:none;transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.08);border-color:var(--border-strong)}
+.feature-link small{display:block;margin-top:18px;font-weight:800;color:var(--accent)}
+@media(max-width:767.98px){.feature-link{min-height:180px}.feature-link:hover{transform:none}}
