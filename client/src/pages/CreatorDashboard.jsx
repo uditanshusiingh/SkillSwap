@@ -31,6 +31,15 @@ export default function CreatorDashboard() {
 
   useEffect(() => { load(); }, []);
 
+  useEffect(() => {
+    if (!showAllGigs) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [showAllGigs]);
+
   const creatorNames = useMemo(
     () => [...new Set(gigs.map((g) => g.creatorName).filter(Boolean))].sort(),
     [gigs]
