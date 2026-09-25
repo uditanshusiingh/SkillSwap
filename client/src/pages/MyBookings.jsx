@@ -27,7 +27,7 @@ export default function MyBookings() {
   useEffect(() => { if (email) load(); }, []);
 
   return (
-    <main className="container py-5">
+    <main className="container py-5 my-bookings">
       <div className="page-head">
         <span className="eyebrow">CLIENT SPACE</span>
         <h1>My bookings</h1>
