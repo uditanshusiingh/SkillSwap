@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getBookings } from '../api';
+import { cancelBooking, getBookings } from '../api';
 import StatusBadge from '../components/StatusBadge';
 import Loader from '../components/Loader';
 
@@ -8,6 +8,7 @@ export default function MyBookings() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [cancellingId, setCancellingId] = useState('');
 
   const load = async () => {
     if (!email) return;
@@ -25,6 +26,20 @@ export default function MyBookings() {
   };
 
   useEffect(() => { if (email) load(); }, []);
+
+  const handleCancel = async (booking) => {
+    if (!window.confirm('Are you sure you want to cancel this booking?')) return;
+    try {
+      setCancellingId(booking._id);
+      setError('');
+      await cancelBooking(booking._id, email);
+      await load();
+    } catch (err) {
+      setError(err?.response?.data?.message || 'Could not cancel this booking. Please try again.');
+    } finally {
+      setCancellingId('');
+    }
+  };
 
   return (
     <main className="container py-5 my-bookings">
@@ -55,7 +70,18 @@ export default function MyBookings() {
                   <StatusBadge status={b.status} />
                 </div>
                 <hr />
-                <p className="small text-secondary mb-0">{b.requirements || 'No additional requirements.'}</p>
+                <div className="d-flex justify-content-between align-items-center gap-3 flex-wrap">
+                  <p className="small text-secondary mb-0">{b.requirements || 'No additional requirements.'}</p>
+                  {b.status !== 'Cancelled' && b.status !== 'Declined' && (
+                    <button
+                      className="btn btn-sm btn-outline-danger"
+                      disabled={cancellingId === b._id}
+                      onClick={() => handleCancel(b)}
+                    >
+                      {cancellingId === b._id ? 'Cancelling…' : 'Cancel Booking'}
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           ))}
