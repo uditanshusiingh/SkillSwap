@@ -566,3 +566,28 @@ body::-webkit-scrollbar{
     align-items:flex-start;
   }
 }
+
+/* Creator dashboard gigs view-all modal */
+.dashboard-modal-backdrop{
+  position:fixed;inset:0;z-index:1100;display:flex;align-items:center;justify-content:center;
+  padding:24px;background:rgba(0,0,0,.62);backdrop-filter:blur(5px);
+}
+.dashboard-gigs-modal{
+  width:min(1100px,100%);max-height:min(82vh,850px);overflow:auto;padding:24px;
+  background:var(--surface);border:1px solid var(--border);border-radius:22px;
+  box-shadow:0 28px 80px rgba(0,0,0,.28);scrollbar-width:none;-ms-overflow-style:none;
+}
+.dashboard-gigs-modal::-webkit-scrollbar{display:none}
+.dashboard-modal-head{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:20px;
+}
+.dashboard-modal-head h3{margin:.3rem 0 0;font-weight:800}
+.dashboard-modal-close{
+  width:38px;height:38px;border:1px solid var(--border);border-radius:50%;
+  background:var(--surface-soft);color:var(--ink);font-size:24px;line-height:1;cursor:pointer;
+}
+@media(max-width:767.98px){
+  .dashboard-modal-backdrop{padding:12px}
+  .dashboard-gigs-modal{padding:16px;max-height:88vh;border-radius:18px}
+  .dashboard-modal-head{margin-bottom:14px}
+}
