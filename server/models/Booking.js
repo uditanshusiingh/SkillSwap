@@ -6,7 +6,7 @@ const bookingSchema = new mongoose.Schema({
   clientEmail: { type: String, required: true, trim: true, lowercase: true },
   requirements: { type: String, default: '', trim: true },
   preferredDate: { type: String, required: true },
-  status: { type: String, enum: ['Pending', 'Accepted', 'Declined'], default: 'Pending' },
+  status: { type: String, enum: ['Pending', 'Accepted', 'Declined', 'Cancelled'], default: 'Pending' },
   paymentStatus: { type: String, enum: ['Pending', 'Paid', 'Failed'], default: 'Pending' },
   razorpayOrderId: { type: String, default: '' },
   razorpayPaymentId: { type: String, default: '' }
