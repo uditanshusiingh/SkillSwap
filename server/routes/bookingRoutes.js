@@ -33,4 +33,29 @@ router.patch('/:id/status', async (req, res) => {
   } catch (e) { res.status(400).json({ message: 'Could not update booking.' }); }
 });
 
+router.patch('/:id/cancel', async (req, res) => {
+  try {
+    const { clientEmail } = req.body;
+    if (!clientEmail) return res.status(400).json({ message: 'Client email is required.' });
+
+    const booking = await Booking.findById(req.params.id).populate('gigId');
+    if (!booking) return res.status(404).json({ message: 'Booking not found.' });
+    if (booking.clientEmail.toLowerCase() !== clientEmail.toLowerCase()) {
+      return res.status(403).json({ message: 'You can only cancel your own booking.' });
+    }
+    if (booking.status === 'Cancelled') {
+      return res.status(400).json({ message: 'Booking is already cancelled.' });
+    }
+    if (booking.status === 'Declined') {
+      return res.status(400).json({ message: 'A declined booking cannot be cancelled.' });
+    }
+
+    booking.status = 'Cancelled';
+    await booking.save();
+    res.json(booking);
+  } catch (e) {
+    res.status(400).json({ message: 'Could not cancel booking.' });
+  }
+});
+
 module.exports = router;
