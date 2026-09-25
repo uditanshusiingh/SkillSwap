@@ -4,7 +4,9 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const filter = req.query.email ? { clientEmail: req.query.email.toLowerCase() } : {};
+    const filter = req.query.email
+      ? { clientEmail: req.query.email.toLowerCase(), status: { $ne: 'Cancelled' } }
+      : { status: { $ne: 'Cancelled' } };
     const bookings = await Booking.find(filter).populate('gigId').sort({ createdAt: -1 });
     res.json(bookings);
   } catch (e) { res.status(500).json({ message: 'Failed to fetch bookings.' }); }
