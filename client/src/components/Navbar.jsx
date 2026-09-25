@@ -13,6 +13,15 @@ export default function Navbar() {
     try { localStorage.setItem('skillswap-theme', dark ? 'dark' : 'light'); } catch {}
   }, [dark]);
 
+  useEffect(() => {
+    if (!open) return;
+    const handleOutsideClick = (event) => {
+      if (!event.target.closest('.navbar')) close();
+    };
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, [open]);
+
   return <nav className="navbar navbar-expand-lg bg-white border-bottom sticky-top">
     <div className="container py-2">
       <Link className="navbar-brand fw-bold brand" to="/" onClick={close}>Skill<span>Swap</span></Link>
