@@ -459,3 +459,21 @@ body::-webkit-scrollbar{
   }
   .navbar .navbar-nav .nav-link{min-height:42px}
 }
+
+
+/* Mobile menu: anchor the dropdown to the right-side menu button */
+@media(max-width:991.98px){
+  .navbar .navbar-collapse{
+    left:auto;
+    right:12px;
+    width:min(270px,calc(100vw - 24px));
+    margin:0;
+  }
+}
+@media(max-width:575.98px){
+  .navbar .navbar-collapse{
+    left:auto;
+    right:10px;
+    width:min(270px,calc(100vw - 20px));
+  }
+}
