@@ -613,3 +613,30 @@ body::-webkit-scrollbar{
     --bs-gutter-x:12px;
   }
 }
+
+/* Home mobile/tablet: remove Bootstrap container side restriction */
+@media(max-width:991.98px){
+  .home-features.container,
+  .hero .container{
+    width:100%!important;
+    max-width:none!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+  .hero .row,
+  .home-features .row{
+    width:100%;
+    margin-left:0;
+    margin-right:0;
+  }
+}
+@media(max-width:575.98px){
+  .home-features .row{
+    --bs-gutter-x:12px;
+  }
+  .home-features .feature-link{
+    padding:16px;
+  }
+}
