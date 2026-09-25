@@ -591,3 +591,25 @@ body::-webkit-scrollbar{
   .dashboard-gigs-modal{padding:16px;max-height:88vh;border-radius:18px}
   .dashboard-modal-head{margin-bottom:14px}
 }
+
+/* Marketplace mobile/tablet: use the full available viewport */
+@media(max-width:991.98px){
+  main.marketplace-page.container{
+    width:100%!important;
+    max-width:none!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+  main.marketplace-page .row{
+    width:100%;
+    margin-left:0;
+    margin-right:0;
+  }
+}
+@media(max-width:575.98px){
+  main.marketplace-page .row{
+    --bs-gutter-x:12px;
+  }
+}
