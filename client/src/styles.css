@@ -487,3 +487,37 @@ body::-webkit-scrollbar{
 .feature-link:hover{color:inherit;text-decoration:none;transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.08);border-color:var(--border-strong)}
 .feature-link small{display:block;margin-top:18px;font-weight:800;color:var(--accent)}
 @media(max-width:767.98px){.feature-link{min-height:180px}.feature-link:hover{transform:none}}
+
+/* ===== Mobile dashboard: use full available width ===== */
+@media(max-width:767.98px){
+  .creator-dashboard.container{
+    width:100%;
+    max-width:none;
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+  .creator-dashboard .row{
+    --bs-gutter-x:12px;
+  }
+  .creator-dashboard .stats{
+    --bs-gutter-x:10px;
+    --bs-gutter-y:10px;
+  }
+  .creator-dashboard .dashboard-stat{
+    padding:14px;
+  }
+  .creator-dashboard .dashboard-stat strong{
+    font-size:1.55rem;
+  }
+  .creator-dashboard .creator-gig-card{
+    padding:16px;
+  }
+  .creator-dashboard .creator-gig-card h5{
+    font-size:.98rem;
+    line-height:1.25;
+  }
+  .creator-dashboard .creator-gig-card p{
+    font-size:.78rem;
+    line-height:1.45;
+  }
+}
