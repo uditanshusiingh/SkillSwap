@@ -33,7 +33,7 @@ export default function MyBookings() {
       setCancellingId(booking._id);
       setError('');
       await cancelBooking(booking._id, email);
-      await load();
+      setItems((current) => current.filter((item) => item._id !== booking._id));
     } catch (err) {
       setError(err?.response?.data?.message || 'Could not cancel this booking. Please try again.');
     } finally {
